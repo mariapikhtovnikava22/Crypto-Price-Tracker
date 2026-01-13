@@ -1,8 +1,8 @@
 import time
 from typing import Optional, Sequence
 
+from app.infrastraction.repositories.price_repository import PricesRepository
 from app.models.price import Prices, TickerEnum
-from app.repositories.price_repository import PricesRepository
 
 
 class PricesService:
