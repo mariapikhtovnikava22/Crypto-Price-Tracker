@@ -1,0 +1,66 @@
+[flake8]
+# https://wemake-python-stylegui.de/en/0.1.0/_pages/violations/best_practices.html
+ignore =
+    D,
+    S104,
+    WPS100,
+    WPS110,
+    WPS115,
+    WPS125,
+    WPS201,
+    WPS214,
+    WPS217,
+    WPS300,
+    WPS305,
+    WPS306,
+    WPS323,
+    WPS331,
+    WPS337,
+    WPS338,
+    WPS348,
+    WPS424,
+    WPS426,
+    WPS430,
+    WPS431,
+    WPS504,
+    WPS605,
+    RST301,
+    WPS332,
+    WPS202,
+    E203,
+    E501
+
+exclude =
+    .git,
+    __pycache__,
+    venv,
+    .pytest_cache,
+
+max-complexity = 10
+max-arguments = 10
+max-attributes = 10
+max-module-members = 10
+max-line-length = 120
+i-control-code = false
+max-line-complexity = 16
+max-try-body-length = 3
+max-local-variables = 10
+max-jones-score = 17
+max-cognitive-score = 17
+
+per-file-ignores =
+    __init__.py: F401, WPS235
+    ./app/**/__init__.py: F401, WPS235
+    tests/*.py: WPS432, WPS204, WPS442, WPS226, S101, D107, WPS202
+    settings/*.py: WPS432, WPS336, D107, D301, WPS125, WPS226, WPS226, WPS331, N802, F401
+    *example*.py: F841
+    app/*utils.py: WPS100
+    */schemas.py: WPS226
+    web/mixins/reports.py: WPS204, WPS235
+    */queries.py: WPS462, WPS291, WPS210, WPS226, WPS204, W291
+    alembic/versions/*.py: WPS102, WPS226, WPS432, WPS213, WPS204
+    app/models/*.py: WPS226, WPS432, WPS114
+    */metrics.py: WPS231, WPS232, WPS432
+    app/services/*.py: WPS211
+    app/services/reports/pnl.py: WPS210
+    */readers.py: WPS526, WPS615
