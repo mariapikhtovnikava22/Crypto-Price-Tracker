@@ -7,13 +7,13 @@ from app.models.price import Prices, TickerEnum
 
 
 class PricesRepository:
-    def __init__(self, session: AsyncSession):
+    def __init__(self, session: AsyncSession) -> None:
         self.session = session
 
     async def create(self, ticker: TickerEnum, price: float, created_at: int) -> Prices:
         instance = Prices(ticker=ticker, price=price, created_at=created_at)
         self.session.add(instance)
-        await self.session.commit()
+        await self.session.flush()
         await self.session.refresh(instance)
         return instance
 
