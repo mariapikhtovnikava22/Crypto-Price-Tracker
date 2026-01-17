@@ -3,6 +3,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from exceptions.exception_handlers import register_error_handler
 from settings.app import AppConfig
 from web.routes import all_routers
 
@@ -17,6 +18,8 @@ def get_application() -> FastAPI:
         CORSMiddleware,
         **AppConfig.CORS,
     )
+
+    register_error_handler(application)
 
     return application
 

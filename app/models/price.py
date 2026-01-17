@@ -2,7 +2,7 @@ import enum
 import time
 import uuid
 
-from sqlalchemy import BigInteger, Column, Enum, Numeric
+from sqlalchemy import BigInteger, Column, Enum, Index, Numeric
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import DeclarativeMeta
@@ -23,3 +23,5 @@ class Prices(Base):
     ticker = Column(Enum(TickerEnum, name="ticker_enum"), nullable=False)
     price = Column(Numeric(precision=18, scale=8), nullable=False)
     created_at = Column(BigInteger, nullable=False, default=lambda: int(time.time()))
+
+    __table_args__ = (Index("idx_prices_ticker", "ticker"),)
