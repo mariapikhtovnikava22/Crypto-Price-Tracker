@@ -71,3 +71,6 @@ migrations/*.pyc
 #celery_beat
 celerybeat-schedule
 
+#Pytest
+.pytest_cache/
+

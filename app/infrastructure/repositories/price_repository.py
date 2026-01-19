@@ -1,9 +1,11 @@
 from typing import Optional, Sequence
 
+from fastapi import Depends
 from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.price import Prices, TickerEnum
+from helpers.db_config import get_async_session
 
 
 class PricesRepository:
@@ -41,3 +43,7 @@ class PricesRepository:
         stmt = stmt.order_by(Prices.created_at)
         result = await self.session.execute(stmt)
         return result.scalars().all()
+
+
+def get_prices_repository(db: AsyncSession = Depends(get_async_session)):
+    return PricesRepository(db)

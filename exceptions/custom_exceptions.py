@@ -7,3 +7,8 @@ class BaseAppError(Exception):
 class PriceNotFoundError(BaseAppError):
     def __init__(self, message: str = "Price not found"):
         super().__init__(message)
+
+
+class TaskDispatchError(Exception):
+    def __init__(self, message: str = "Fetch prices task failed"):
+        super().__init__(message)

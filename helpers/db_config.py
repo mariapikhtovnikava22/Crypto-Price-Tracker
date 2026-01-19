@@ -1,7 +1,6 @@
-from contextlib import asynccontextmanager
-from typing import AsyncGenerator
+from asyncio import current_task
 
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncSession, async_scoped_session, async_sessionmaker, create_async_engine
 
 from settings import DbConfig
 
@@ -15,20 +14,13 @@ async_engine = create_async_engine(
 )
 async_session = async_sessionmaker(async_engine, expire_on_commit=False, class_=AsyncSession)
 
+scoped_session = async_scoped_session(async_session, scopefunc=current_task)
 
-@asynccontextmanager
-async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
+
+def get_async_scoped_session() -> AsyncSession:
+    return scoped_session()
+
+
+async def get_async_session() -> AsyncSession:
     async with async_session() as session:
-        try:
-            yield session
-            await session.commit()
-        except Exception as err:
-            await session.rollback()
-            raise err
-        finally:
-            await session.close()
-
-
-async def get_session():
-    async with get_async_session() as session:
         yield session
