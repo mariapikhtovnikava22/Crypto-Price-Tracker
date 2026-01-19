@@ -46,7 +46,6 @@ coverage.xml
 
 # Environments/secrets
 .env
-.env.*
 *.env
 secrets/*
 
@@ -68,4 +67,10 @@ migrations/*.pyc
 
 # MyPy
 .mypy_cache/
+
+#celery_beat
+celerybeat-schedule
+
+#Pytest
+.pytest_cache/
 

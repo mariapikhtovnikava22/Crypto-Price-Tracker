@@ -1,0 +1,11 @@
+.git/
+.github/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.gitignore
+.gitattributes
+.env.example
+.pre-commit-config.yaml
+README.md
+.flake8

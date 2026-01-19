@@ -1,0 +1,72 @@
+version: '3.9'
+
+services:
+
+  prices_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prices_api
+    depends_on:
+      - prices_postgres
+      - redis
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    entrypoint: /app/entrypoints/entrypoint.sh
+
+  
+  prices_celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prices_celery_worker
+    depends_on:
+      - redis
+      - prices_postgres
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    entrypoint: /app/entrypoints/entrypoint_celery.sh
+
+  prices_celery_beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prices_celery_beat
+    depends_on:
+      - redis
+      - prices_postgres
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    entrypoint: /app/entrypoints/entrypoint_celery_beat.sh
+
+  prices_postgres:
+    image: postgres:15
+    container_name: prices_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_HOST: ${DB_HOST}
+    ports:
+      - "5433:5432"
+    volumes:
+      - prices_postgres_data:/var/lib/postgresql/data
+    
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+
+volumes:
+  prices_postgres_data:
+    driver: local
