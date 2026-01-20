@@ -2,8 +2,8 @@ import logging
 import time
 from typing import Iterable
 
-from app.di.prices_unit_of_work import PricesUnitOfWork
 from app.infrastructure.integrations.deribit import DeribitClient
+from app.infrastructure.uow.prices_unit_of_work import PricesUnitOfWork
 from app.models.price import Prices, TickerEnum
 from exceptions.custom_exceptions import TaskDispatchError
 

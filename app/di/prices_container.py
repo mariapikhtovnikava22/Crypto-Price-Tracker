@@ -1,8 +1,8 @@
 from dependency_injector import containers, providers
 
-from app.di.prices_unit_of_work import PricesUnitOfWork
 from app.infrastructure.integrations.deribit import DeribitClient
 from app.infrastructure.repositories.price_repository import PricesRepository
+from app.infrastructure.uow.prices_unit_of_work import PricesUnitOfWork
 from app.services.fetch_prices_service import FetchPricesService
 from helpers.db_config import get_async_scoped_session
 from settings.deribit import DerbitConfig

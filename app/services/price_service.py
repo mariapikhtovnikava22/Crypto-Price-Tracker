@@ -2,7 +2,7 @@ from typing import Optional, Sequence
 
 from fastapi import Depends
 
-from app.di.prices_unit_of_work import PricesUnitOfWork, get_prices_uow
+from app.infrastructure.uow.prices_unit_of_work import PricesUnitOfWork, get_prices_uow
 from app.models.price import Prices, TickerEnum
 from exceptions.custom_exceptions import PriceNotFoundError
 
